@@ -7,7 +7,7 @@ import Header from './header'
 const name = 'Cafe Estela'
 export const siteTitle = '✨Meet at Cafe Estela ☕️'
 
-export default function Layout({ children, home, invites }) {
+export default function Layout({ children, home }) {
   return (
     <div className={styles.container}>
       <Head>
@@ -25,7 +25,7 @@ export default function Layout({ children, home, invites }) {
         <meta name="og:title" content={siteTitle} />
         <meta name="twitter:card" content="summary_large_image" />
       </Head>
-      <Header invites={invites}/>
+      <Header/>
       <header className={styles.header}>
         {home ? (
           <>

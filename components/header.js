@@ -1,25 +1,15 @@
 import Link from 'next/link'
 import { useUser } from '../lib/hooks'
 
-const Header = ({invites}) => {
+const Header = () => {
   const user = useUser()
 
   return (
     <header>
       <nav>
         <ul>
-          <li>
-            <Link href="/">
-              <a>Home</a>
-            </Link>
-          </li>
-          {user || invites.length > 0 ? (
+          {user ? (
             <>
-              <li>
-                <Link href="/profile">
-                  <a>Profile</a>
-                </Link>
-              </li>
               <li>
                 <a href="/api/logout">Logout</a>
               </li>

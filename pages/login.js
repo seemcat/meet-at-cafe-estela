@@ -1,13 +1,14 @@
-import { useState, useReducer } from 'react'
+import { useState } from 'react'
 import Router from 'next/router'
 import { useUser } from '../lib/hooks'
-import Layout from '../components/layout'
 import Form from '../components/form'
 import { getGatheringsData } from '../lib/gatherings'
+import Layout, { siteTitle } from '../components/layout'
+import Head from 'next/head'
 
 import { Magic } from 'magic-sdk'
 
-const Login = ({ dispatchInvites }) => {
+const Login = () => {
   //console.log("dispatchJwtToken: ", getJwtToken('test'));
   useUser({ redirectTo: '/', redirectIfFound: true })
 
@@ -41,9 +42,10 @@ const Login = ({ dispatchInvites }) => {
         // calling strapi api
         const gatheringsData = await getGatheringsData(didToken)
         console.log('GATHERING DATA: ', gatheringsData)
-        // save to useState
-        dispatchInvites(gatheringsData)
-        Router.push('/')
+        Router.push({
+          pathname: '/',
+          query: { data: JSON.stringify(gatheringsData) }
+        })
       } else {
         throw new Error(await res.text())
       }
@@ -54,7 +56,10 @@ const Login = ({ dispatchInvites }) => {
   }
 
   return (
-    <>
+    <Layout>
+    <Head>
+      <title>{siteTitle}</title>
+    </Head>
       <div className="login">
         <Form errorMessage={errorMsg} onSubmit={handleSubmit} />
       </div>
@@ -67,7 +72,7 @@ const Login = ({ dispatchInvites }) => {
           border-radius: 4px;
         }
       `}</style>
-    </>
+    </Layout>
   )
 }
 
