@@ -6,7 +6,7 @@ Enjoy 🎉
 
 ## Getting Started
 
-First, run the development server:
+First, ```yarn install``` and then run the development server:
 
 ```bash
 npm run dev
